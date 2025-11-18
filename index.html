@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather & Country Explorer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+
+  </style>
+</head>
+<body>
+<body>
+
+
+  <video id="weather-bg-video" autoplay muted loop playsinline class="bg-video" style="display:block;">
+    <source src="assets/video/1.mp4" type="video/mp4">
+  </video>
+
+ 
+  <video id="country-bg-video" autoplay muted loop playsinline class="bg-video" style="display:none;">
+    <source src="assets/video/3.mp4" type="video/mp4">
+  </video>
+
+
+  <div class="container">
+    <div class="header">
+      <h1>Weather & Country Explorer</h1>
+      <p class="subtitle">Discover weather and explore countries around the world</p>
+    </div>
+
+    <div class="search-card">
+      <div class="input-wrapper">
+        <input type="text" id="city-input" placeholder="Enter city name (ex:- London, Tokyo, Paris)">
+        <p class="hint">Press Enter to search</p>
+      </div>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p style="color: #667eea; font-weight: 600; font-size: 1.1em;">Fetching weather data...</p>
+      </div>
+
+      <div class="error" id="error"></div>
+    </div>
+
+    <div class="weather-section" id="weather-section">
+      <div class="weather-card">
+        <div class="weather-header">
+          <h2 class="location-name" id="location-name"></h2>
+          <a class="country-link" id="country-link">
+            <span id="country-name"></span> 🌍
+          </a>
+        </div>
+
+        <div class="weather-main">
+          <img class="weather-icon" id="weather-icon" src="" alt="Weather icon">
+          <div class="weather-temp">
+            <div class="temp-value" id="temp-value"></div>
+            <div class="temp-condition" id="temp-condition"></div>
+          </div>
+        </div>
+
+        <div class="weather-details">
+          <div class="detail-item">
+            <div class="detail-label">Feels Like</div>
+            <div class="detail-value" id="feels-like"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Humidity</div>
+            <div class="detail-value" id="humidity"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Wind Speed</div>
+            <div class="detail-value" id="wind-speed"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Pressure</div>
+            <div class="detail-value" id="pressure"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Visibility</div>
+            <div class="detail-value" id="visibility"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">UV Index</div>
+            <div class="detail-value" id="uv-index"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Local Time</div>
+            <div class="detail-value" id="local-time"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Region</div>
+            <div class="detail-value" id="region"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Timezone</div>
+            <div class="detail-value" id="timezone"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Latitude & Longitude</div>
+            <div class="detail-value" id="lat-lon"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Last Updated</div>
+            <div class="detail-value" id="last-updated"></div>
+          </div>
+          <div class="detail-item">
+            <div class="detail-label">Wind Direction</div>
+            <div class="detail-value" id="wind-direction"></div>
+          </div>
+
+        </div>
+
+        <div class="forecast-section">
+          <h3 class="section-title">7-Day Weather Forecast</h3>
+          <div class="forecast-container" id="forecast-container"></div>
+        </div>
+
+        <div class="hourly-section">
+          <h3 class="section-title">Hourly Forecast (Next 24 Hours)</h3>
+          <div class="hourly-container" id="hourly-container"></div>
+        </div>
+
+        <div class="map-section">
+          <h3 class="section-title">Interactive Weather Map</h3>
+          <div class="map-controls">
+            <button class="map-layer-btn active" data-layer="temp">Temperature</button>
+            <button class="map-layer-btn" data-layer="clouds">Clouds</button>
+            <button class="map-layer-btn" data-layer="precipitation">Precipitation</button>
+            <button class="map-layer-btn" data-layer="wind">Wind</button>
+            <button class="map-layer-btn" data-layer="pressure">Pressure</button>
+          </div>
+          <div class="weather-map" id="weather-map"></div>
+          <div class="map-legend">
+            <p><strong>Interactive Map:</strong> Click layer buttons to view different weather data. Use mouse to zoom
+              and drag.</p>
+          </div>
+        </div>
+
+        <div class="astronomy-section">
+          <h3 class="section-title">Astronomy & Air Quality</h3>
+          <div class="astronomy-grid" id="astronomy-grid"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="country-section" id="country-section">
+      <button class="back-button" id="back-button">← Back to Weather</button>
+
+      <div class="country-card">
+        <div class="country-header">
+          <h2 class="country-name" id="country-full-name"></h2>
+          <div class="country-flag" id="country-flag"></div>
+        </div>
+
+        <div class="country-info-grid" id="country-info-grid">
+          <!-- Country details will be inserted here -->
+        </div>
+
+        <div class="country-map" id="country-map"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+<footer class="footer">
+  <div class="footer-content">
+    <h3>Created By</h3>
+    <div class="footer-details">
+      <div class="footer-item">
+        <span class="footer-icon"></span>
+        <span>Manesh Edirisinghe</span>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-item">
+        <span class="footer-icon"></span>
+        <span>PR25119111</span>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      © 2025 Weather & Country Explorer | All Rights Reserved
+    </div>
+  </div>
+</footer>
+
+</html>
