@@ -408,13 +408,11 @@ if (backButton) {
       document.getElementById('country-full-name').textContent = country.name.common;
       document.getElementById('country-flag').innerHTML = `<img src="${country.flags.png}" alt="${country.name.common} flag">`;
 
-      // Set flag as background
       const countryHeader = document.querySelector('.country-header');
       countryHeader.style.setProperty('--flag-url', `url(${country.flags.png})`);
       const headerBefore = document.querySelector('.country-header::before');
       countryHeader.querySelector('::before')?.style.setProperty('background-image', `url(${country.flags.png})`);
-      
-      // Alternative method to set background
+
       const style = document.createElement('style');
       style.textContent = `
         .country-header::before {
